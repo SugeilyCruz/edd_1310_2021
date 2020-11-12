@@ -65,6 +65,7 @@ class Juego:
             vecinos -= 1
         return (vecinos)
 
+
     def evolucionar(self):
         lista_clone=[]
 #Guarda mi Array2D en mi lista provicional.
@@ -73,7 +74,7 @@ class Juego:
             for cn in range( self.grid.get_num_cols() ):
                 list_row.append( self.grid.get_item(rw, cn) )
             lista_clone.append(list_row)
-#recorre cada celula de get_numero_vecinos_vivos y porfa la nueva_generacion.
+#Reglas del juego de la vida.
         for rws in range(self.grid.get_num_rows()):
             for cl in range(self.grid.get_num_cols()):
 #1. Si una célula esta viva y tiene 2 o 3 vecinos vivos, la célula sobrevive en la siguiente generación.
@@ -92,3 +93,14 @@ class Juego:
         for r_i in range( len(lista_clone) ):
             for c_i in range( len(lista_clone[r_i])):
                 self.grid.set_item( r_i, c_i, lista_clone[r_i][c_i])
+
+    def contarVivas(self):
+        self.life = 0
+        self.dead = 0
+        for rws in range(self.grid.get_num_rows()):
+            for cl in range(self.grid.get_num_cols()):
+                if self.grid.get_item(rws,cl) == self.CELULA_VIVA:
+                    self.life += 1
+                else:
+                    self.dead += 1
+        return print(f"Celulas Vivas:{self.life}\nCelulas Muertas:{self.dead}")
