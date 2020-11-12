@@ -28,3 +28,4 @@ class Array2D:
         for ren in range(self.__rows):
             for col in range(self.__cols):
                 self.__array[ren][col]=valor
+                

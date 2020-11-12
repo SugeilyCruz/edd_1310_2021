@@ -65,7 +65,6 @@ class Juego:
             vecinos -= 1
         return (vecinos)
 
-
     def evolucionar(self):
         lista_clone=[]
 #Guarda mi Array2D en mi lista provicional.

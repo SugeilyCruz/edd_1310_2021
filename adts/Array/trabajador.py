@@ -10,6 +10,7 @@ for x in range(0,leer,1):
     x=x+1
 for x in td:
     print(x)
+    
 print("\n-------S U E L D O S-------")
 for y in range(1,leer,1):
     ml=int(td.get_item(y)[4])

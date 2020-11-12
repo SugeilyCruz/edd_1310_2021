@@ -1,5 +1,4 @@
 from juego import Juego
-
 #Gen0
 juego = Juego(7, 7, 6, [(1,2), (2,1), (2,2), (2,3)])
 juego.imprime_grid()
