@@ -26,9 +26,9 @@ class LinkedList:
             curr_node= curr_node.siguiente#agrega el nuevo nodo a curr_node, estamos formando una lista
         print("")#cuando curr es igual a none imprime un ""
 
-    # def remove(self,value):
-    #     curr_node=self.__head
-    #     while curr_node.data != value and curr_node.siguiente != None:#mientras que curr sea diferente del valor que pedimos y sea diferente de none(que no hayamos llegado al final.)
-    #         curr_node= curr_node.siguiente
-    #     if curr_node.data == value:#curr == None tambien. me sali porque encontre el valor o porque es el final.
-    #         #curr_node = tenemos que declarar un nuevo para que guarde el nodo anterior y que se conecta al siguiente. osea 5 al 20.
+    def remove(self,value):
+        curr_node=self.__head
+        while curr_node.data != value and curr_node.siguiente != None:#mientras que curr sea diferente del valor que pedimos y sea diferente de none(que no hayamos llegado al final.)
+            curr_node= curr_node.siguiente
+        if curr_node.data == value:#curr == None tambien. me sali porque encontre el valor o porque es el final.
+            #curr_node = tenemos que declarar un nuevo para que guarde el nodo anterior y que se conecta al siguiente. osea 5 al 20.
