@@ -7,10 +7,10 @@ class LinkedList:
         self.__head= None
 
     def is_empty(self):
-        return self.__head == None #pregunta si head esta apuntando a Nune=vacio o ya tiene un valor.
+        return self.__head == None #pregunta si head esta apuntando a None=vacio o ya tiene un valor.
 
     def append(self,value):#agregar un nuevo nodo.
-        nuevo= Nodo(value)# creo cuanto va a valer mi nuevo nodo con value.
+        nuevo= Nodo(value)#mi nuevo nodo con value.
         if self.__head == None: #self.is_empty() La lista esta vacia.
             self.__head=nuevo
         else:#la lista no esta vacia, ya tiene un valor en head
@@ -29,6 +29,61 @@ class LinkedList:
     def remove(self,value):
         curr_node=self.__head
         while curr_node.data != value and curr_node.siguiente != None:#mientras que curr sea diferente del valor que pedimos y sea diferente de none(que no hayamos llegado al final.)
+            curr_new=curr_node# guardamos el nodo antes de que pase al siguiente y lo guarde.
             curr_node= curr_node.siguiente
-        if curr_node.data == value:#curr == None tambien. me sali porque encontre el valor o porque es el final.
-            #curr_node = tenemos que declarar un nuevo para que guarde el nodo anterior y que se conecta al siguiente. osea 5 al 20.
+        if curr_node.data == value and curr_node.data != self.__head.data:
+            curr_new.siguiente= curr_node.siguiente#el numero siguiente de 5 sera 20
+        else:
+            if curr_node.data == self.__head.data:
+                self.__head = self.__head.siguiente
+
+    def preppend(self,value): #Agrega el nuevo nodo al principio de head.
+        nuevo=Nodo(value, self.__head)
+        self.__head= nuevo
+
+    def tail(self):#Regresa el ultimo nodo.
+        curr_node=self.__head
+        while curr_node.siguiente != None:
+            curr_node= curr_node.siguiente
+        return curr_node
+
+    def get(self,posicion = None):#por defecto regresa el ultimo. #Terminar tarea
+    contador=0
+    dato=None
+    if posicion == None:
+        dato=self.tail().data
+    else:
+        pass
+    return dato
+
+
+#OPCIONALES 
+    #Agregar antes de la primer coincidiencia, si no encuentra la referencia no hace la inserccion.
+    def add_before(self,reference_value,value):
+        nuevo= Nodo(value)
+        curr_node=self.__head
+        while curr_node.data != reference_value and curr_node.siguiente != None:#busca nuestro nodo de referencia.
+            curr_new=curr_node
+            curr_node= curr_node.siguiente
+        if curr_node.data == reference_value and curr_node.data != self.__head.data:#nodo igual a referencia y diferente a head.
+            curr_new.siguiente=nuevo
+            curr_new.siguiente.siguiente=curr_node
+        else:#si no es el caso entra aqui y pregunta nodo igual a head.
+            if curr_node.data == reference_value:
+                self.__head=nuevo
+                nuevo.siguiente=curr_node
+    #Agregar después de la referencia
+    def add_after(self,reference_value,value):
+        nuevo= Nodo(value)
+        curr_node=self.__head
+        while curr_node.data != reference_value and curr_node.siguiente != None:#busca nuestro nodo de referencia.
+            curr_node= curr_node.siguiente
+            curr_new= curr_node.siguiente#guarada el valor de curr_node(curr_node= curr_node.siguiente).
+        if curr_node.data == reference_value and curr_node.data != self.__head.data:#nodo igual a referencia y diferente a head.
+            curr_node.siguiente=nuevo
+            curr_node.siguiente.siguiente=curr_new
+        else:
+            if curr_node.data == reference_value:
+                curr_new = curr_node.siguiente
+                curr_node.siguiente=nuevo
+                curr_node.siguiente.siguiente=curr_new
