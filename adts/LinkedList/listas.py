@@ -7,10 +7,10 @@ class LinkedList:
         self.__head= None
 
     def is_empty(self):
-        return self.__head == None #pregunta si head esta apuntando a None=vacio o ya tiene un valor.
+        return self.__head == None #pregunta si head esta apuntando a Nune=vacio o ya tiene un valor.
 
     def append(self,value):#agregar un nuevo nodo.
-        nuevo= Nodo(value)#mi nuevo nodo con value.
+        nuevo= Nodo(value)# creo cuanto va a valer mi nuevo nodo con value.
         if self.__head == None: #self.is_empty() La lista esta vacia.
             self.__head=nuevo
         else:#la lista no esta vacia, ya tiene un valor en head
@@ -45,19 +45,21 @@ class LinkedList:
         curr_node=self.__head
         while curr_node.siguiente != None:
             curr_node= curr_node.siguiente
-        return curr_node
+        return curr_node.data
 
-    def get(self,posicion = None):#por defecto regresa el ultimo. #Terminar tarea
-    contador=0
-    dato=None
-    if posicion == None:
-        dato=self.tail().data
-    else:
-        pass
-    return dato
+    def get(self,posicion = None):#por defecto regresa el ultimo.
+        ctd=0
+        curr_node=self.__head
+        if posicion == None:
+            dato=self.tail()
+        else:
+            while (curr_node):#entra el dato
+                if posicion == ctd:#si la posicion es la misma que contador entra y se detiene nuestro while
+                    dato= curr_node.data
+                ctd+=1
+                curr_node= curr_node.siguiente
+        return dato
 
-
-#OPCIONALES 
     #Agregar antes de la primer coincidiencia, si no encuentra la referencia no hace la inserccion.
     def add_before(self,reference_value,value):
         nuevo= Nodo(value)
@@ -72,6 +74,7 @@ class LinkedList:
             if curr_node.data == reference_value:
                 self.__head=nuevo
                 nuevo.siguiente=curr_node
+
     #Agregar después de la referencia
     def add_after(self,reference_value,value):
         nuevo= Nodo(value)
