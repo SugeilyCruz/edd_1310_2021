@@ -1,6 +1,6 @@
-from circulelist import CirculeLists
+from circularlist import CircularLists
 
-dl= CirculeLists()
+dl= CircularLists()
 print(f"dl Esta vacia? {dl.is_empty()}")
 dl.get_size()
 dl.insert(10)
@@ -16,7 +16,8 @@ print(f"Elemento {dl.search(20)}")
 # valor=int(input("Ingresa el elemento a buscar: "))
 # print(f"Elemento {valor} {dl.search(valor)}")
 dl.insert(20)
-dl.insert(10)
+dl.insert(15)
+dl.insert(38)
 dl.insert()
 dl.get_size()
 print(f"dl Esta vacia? {dl.is_empty()}")

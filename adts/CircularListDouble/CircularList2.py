@@ -1,18 +1,23 @@
 class Nodo:
-    def __init__(self, value, siguiente=None):
+    def __init__(self, value, siguiente=None,anterior=None):
         self.data=value
         self.next=siguiente
+        self.prev=anterior
 
-class CirculeLists:#à Constructor
+class CircularListsDouble:#à Constructor
     def __init__(self):
         self.__head=None
         self.__ref=None #Self.__tail==> el mayor.
         self.__size=0
 
     def get_ref(self):
-        print("Head==>", self.__head.data)
-        print("Ref==>", self.__ref.data)
-        print("Ref.siguiente que apunta a Head==>", self.__ref.siguiente.data)
+        if self.is_empty():
+            print("Lista vacia")
+        else:
+            print("Head==>", self.__head.data)
+            print("Ref==>", self.__ref.data)
+            print("Ref.siguiente que apunta a Head==>", self.__ref.siguiente.data)
+            print("Head.anterior que apunta a Ref==>", self.__head.prev.data)
 
     def get_size(self):# Regresa el numero de elemntos.
         return print(f"Size==>{self.__size}")
@@ -25,6 +30,7 @@ class CirculeLists:#à Constructor
         if self.is_empty():
             self.__head=self.__ref=new
             self.__ref.siguiente=self.__head
+            self.__head.prev=self.__ref
             self.__size+=1
         elif value == None:
             pass
@@ -34,12 +40,14 @@ class CirculeLists:#à Constructor
             curr_ref=self.__ref
             self.__ref=curr_ref.siguiente=new
             self.__ref.siguiente=self.__head
+            self.__head.prev=self.__ref
             self.__size+=1
         else:
             if value < self.__head.data: #New < head
                 new.siguiente=self.__head
                 self.__head= new
                 self.__ref.siguiente=self.__head
+                self.__head.prev=self.__ref
                 self.__size+=1
             else:
                 if value > self.__head.data:#New | menor | intermedios | mayor |
@@ -53,12 +61,17 @@ class CirculeLists:#à Constructor
 
     def search(self,value=None):#à busca el elemento value y regresa true o false.
         info=False
-        curr_ref=self.__ref
-        while curr_ref.siguiente != self.__ref:
+        if self.is_empty():
+            print("Lista vacia")
+        else:
+            curr_ref=self.__ref #3 4 5 6
+            while curr_ref.siguiente != self.__ref:
+                if curr_ref.data==value:
+                    info=True
+                curr_ref=curr_ref.siguiente
             if curr_ref.data==value:
                 info=True
-            curr_ref=curr_ref.siguiente
-        return info
+            return info
 
     def remove(self,value=None):#elimina el elemento value.
         if self.is_empty():
@@ -77,6 +90,7 @@ class CirculeLists:#à Constructor
             if curr_ref.data == self.__head.data:
                 self.__head = self.__head.siguiente
                 self.__ref.siguiente=self.__head
+                self.__head.prev=self.__ref
                 self.__size-=1
             elif curr_ref.data == self.__ref.data:
                 curr_ref2=self.__head
@@ -84,6 +98,7 @@ class CirculeLists:#à Constructor
                     curr_ref2=curr_ref2.siguiente
                 curr_ref2.siguiente=self.__head
                 self.__ref= curr_ref2
+                self.__head.prev=self.__ref
                 self.__size-=1
             else:
                 curr_ant.siguiente=curr_ant.siguiente.siguiente
