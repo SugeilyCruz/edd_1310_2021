@@ -18,23 +18,21 @@ salida en una tupla (2,5)
         self.__camino = Stack()
         self.__previa = None
 
-#Pinta el laberinto
+    #Pinta el laberinto
     def to_string(self):
         self.__laberinto.to_string()
 
-#Establece la entrada "E" en la matriz, verificar limites perifericos.
+    #Establece la entrada "E" en la matriz
     def set_entrada(self,ren,col):
         #Terminar la validacion de las coordenadas que cheque que este dentro de pasillos
-        for pasillo in pasillos:
-            self.__laberinto.set_item(pasillo[0],pasillo[1] ,'0')
         self.__laberinto.set_item(ren,col,'E')
 
-#Establece la salida "S" en la matriz, dentro de los limites perifericos de la matriz.
+    #Establece la salida "S" en la matriz
     def set_salida(self,ren,col):
         #Terminar la validacion de las coordenadas
         self.__laberinto.set_item(ren,col,'S')
 
-#pregunta si nuestra posicion es igual a S=salida.
+    #pregunta si nuestra posicion es igual a S=salida.
     def es_salida(self,ren,col):#antes de cambiar de lugar
         return self.__laberinto.set_item(ren,col)== 'S'
 
@@ -43,17 +41,34 @@ salida en una tupla (2,5)
         for renglon in range(self.__laberinto.get_num_rows()):
             for columna in range(self.__laberinto.get_num_cols()):
                 if self.__laberinto.get_item(renglon,columna)=='E':
-                    self.__camino.push(tuple(renglon,columna))#lo metemos a la pila como primer posicion
+                    self.__camino.push((renglon,columna))
                     encontrado=True
         return encontrado
 
-#guarda la tupla anterior
+    def imprimir_camino(self):
+        self.__camino.to_string()
+
+    def get_pos_actual(self):
+        return self.__camino.peek()
+
+    #guarda la tuple anterior
     def set_previa(self,pos_previa):
         self.__previa=pos_previa
 
     def get_previa(self):
         return self.__previa
 
-        def resolver_labaerinto(self):
-            pass
-            #Aplicar reglas
+    def resolver_labaerinto(self):
+        actual=self.__camino.peek()
+        #buscar izq, agregar validaciones para los limites del laberinto.
+        if (actual[1]-1) != -1 and self.__laberinto.get_item(actual[0], actual[1]-1)=='0' and self.get_previa() != (actual[0], actual[1]-1) and self.__laberinto.get_item(actual[0], actual[1]-1) !="X":
+            self.set_previa(actual)
+            self.__camino.push((actual[0], actual[1]-1))
+        #busca arriba
+        elif (actual[0]-1) != -1 and self.__laberinto.get_item(actual[0]-1, actual[1]=='0' and self.get_previa() != (actual[0]-1, actual[1]) and self.__laberinto.get_item(actual[0]-1, actual[1]) !="X":
+            self.set_previa(actual)
+            self.__camino.push((actual[0]-1, actual[1]))
+
+
+
+        #Aplicar reglas

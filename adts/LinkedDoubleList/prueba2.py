@@ -31,3 +31,4 @@ print("")
 l.find_from_head(15)
 l.find_from_tail(20)
 print("")
+print(f"size=> {l.get_size()}")#Total de Nodos

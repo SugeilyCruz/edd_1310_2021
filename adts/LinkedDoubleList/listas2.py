@@ -11,10 +11,6 @@ class LinkedDoubleList:
         self.__size=0
 
     def get_size(self):# Regresa el numero de elemntos.
-        curr_node=self.__head
-        while curr_node != None:
-            curr_node= curr_node.next
-            self.__size += 1
         return self.__size
 
     def is_empty(self):#Regresa true si esta vacia, false si no.
@@ -31,6 +27,7 @@ class LinkedDoubleList:
             curr_new=self.__tail
             self.__tail=curr_node.next=new
             self.__tail.prev=curr_new
+        self.__size += 1#incrementando el tamaño. para el get_size
 
     def transversal(self): #Recorrido desde Head.
         curr_node=self.__head
@@ -97,6 +94,7 @@ class LinkedDoubleList:
             elif self.__tail.data == value:
                 self.__tail.prev.next = None
                 self.__tail = self.__tail.prev #TailNuevo
+        self.__size -= 1
 
     def remove_from_tail(self,value): #Eliminar a partir de Tail
         curr_node=self.__tail
@@ -115,6 +113,7 @@ class LinkedDoubleList:
             elif self.__head.data == value:
                 self.__head.next.prev = None
                 self.__head = self.__head.next #HeadNuevo
+        self.__size -= 1
 
 """ i = self.__size - 1 - index
         cont = 0
