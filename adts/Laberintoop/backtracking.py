@@ -29,19 +29,17 @@ class LaberintoADT:
     Establece la entrada 'E', en la matriz, verificar limites
     '''
     def set_entrada( self, ren, col ):
-        #terminar la validacion de las coordenadas
         for renglon in range(self.__laberinto.get_num_rows() ):
             for columna in range(self.__laberinto.get_num_cols() ):
                 if renglon==ren:
                     if columna==col:
                         self.__laberinto.set_item( ren, col, 'E')
-        print(f"~~Limites de la Matriz[{renglon},{columna}]~~")
+        #print(f"~~Limites de la Matriz[{renglon},{columna}]~~")
 
     '''
     Establece la salida 'S', en la matriz, verificar limites periféricos
     '''
     def set_salida( self, ren, col ):
-        #terminar la validacion de las coordenadas
         for renglon in range(self.__laberinto.get_num_rows() ):
             for columna in range(self.__laberinto.get_num_cols() ):
                 if renglon==ren:
@@ -67,31 +65,33 @@ class LaberintoADT:
     def get_previa( self ):
         return self.__previa
 
+    def imprimir_camino( self ):
+        self.__camino.to_string()
+
+    def get_pos_actual( self ):
+        return self.__camino.peek()
+
     def resolver_laberinto( self ):
         #aplicar reglas
         actual=self.__camino.peek() #<== (5,2)
         #Izquierda (self.__laberinto.get_item(actual[0], actual[1]-1))
-        if (actual[1]-1) != -1 and self.__laberinto.get_item(actual[0], actual[1]-1) == "0" and self.__laberinto.get_item(actual[0], actual[1]-1) != "X" and self.get_previa()!= (actual[0], actual[1]-1):
-            print("Mover izq")
-            self.set_previa(actual)
-            self.__camino.push((actual[0],actual[1]-1))
+        if actual[1]-1 != -1 and self.es_salida(actual[0],actual[1]-1 ) or self.__laberinto.get_item(actual[0],actual[1]-1) == '0' and self.get_previa() != (actual[0],actual[1]-1)  and self.__laberinto.get_item(actual[0],actual[1]-1) != 'X':
+            self.set_previa( actual)
+            self.__camino.push( ( actual[0],actual[1]-1 ) )
         #arriba ( self.__laberinto.get_item(actual[0]-1, actual[1]))
-        elif (actual[0]-1) != -1 and self.__laberinto.get_item(actual[0]-1, actual[1]) == "0" and self.__laberinto.get_item(actual[0]-1, actual[1]) != "X" and self.get_previa()!= (actual[0]-1, actual[1]):
-            print("Mover arriba")
-            self.set_previa(actual)
-            self.__camino.push((actual[0]-1,actual[1]))
+        elif actual[0]-1 != -1 and self.es_salida(actual[0]-1,actual[1]) or self.__laberinto.get_item(actual[0]-1,actual[1]) == '0' and self.get_previa() != (actual[0]-1,actual[1])  and self.__laberinto.get_item(actual[0]-1,actual[1]) != 'X':
+            self.set_previa( actual)
+            self.__camino.push( (actual[0]-1,actual[1]) )
         #derecha ( self.__laberinto.get_item(actual[0], actual[1]+1))
-        elif (actual[1]+1) != +1 and self.__laberinto.get_item(actual[0], actual[1]+1) == "0" and self.__laberinto.get_item(actual[0], actual[1]+1) != "X" and self.get_previa()!= (actual[0], actual[1]+1):
-            print("Mover arriba")
-            self.set_previa(actual)
-            self.__camino.push((actual[0],actual[1]+1))
+        elif actual[1]+1 != -1 and self.es_salida(actual[0], actual[1]+1) or self.__laberinto.get_item(actual[0], actual[1]+1) == '0' and self.get_previa() != (actual[0], actual[1]+1)  and self.__laberinto.get_item(actual[0], actual[1]+1) != 'X':
+            self.set_previa( actual)
+            self.__camino.push( (actual[0], actual[1]+1) )
         #abajo ( self.__laberinto.get_item(actual[0]+1, actual[1]))
-        elif (actual[0]+1) != +1 and self.__laberinto.get_item(actual[0]+1, actual[1]) == "0" and self.__laberinto.get_item(actual[0]+1, actual[1]) != "X" and self.get_previa()!= (actual[0]+1, actual[1]):
-            print("Mover arriba")
-            self.set_previa(actual)
-            self.__camino.push((actual[0]+1,actual[1]))
+        elif actual[0]+1 != -1 and self.es_salida(actual[0]+1,actual[1]) or self.__laberinto.get_item(actual[0]+1, actual[1]) == "0" and self.get_previa() != (actual[0]+1, actual[1]) and self.__laberinto.get_item(actual[0]+1, actual[1]) != "X" :
+            self.set_previa( actual)
+            self.__camino.push( (actual[0]+1,actual[1]) )
         #Backtracking
         else:
-            self.__laberinto.set_item(actual[0],actual[1],"X")
-            self.set_previa= actual
+            self.__laberinto.set_item( actual[0] , actual[1] ,'X' )
+            self.__previa = actual
             self.__camino.pop()

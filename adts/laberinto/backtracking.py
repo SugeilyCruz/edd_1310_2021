@@ -26,17 +26,28 @@ class LaberintoADT:
     """
     def set_entrada( self , ren , col ):
         # Terminar la validación de las coordenadas
-        self.__laberinto.set_item( ren , col , 'E' )
+        for renglon in range(self.__laberinto.get_num_rows() ):
+            for columna in range(self.__laberinto.get_num_cols() ):
+                if renglon==ren:
+                    if columna==col:
+                        self.__laberinto.set_item( ren, col, 'E')
 
     """
     Establecer salida, dentro de los límites periféricos de la matriz
     """
     def set_salida( self , ren , col ):
         # Terminar las validaciones
-        self.__laberinto.set_item( ren , col , 'S' )
+        for renglon in range(self.__laberinto.get_num_rows() ):
+            for columna in range(self.__laberinto.get_num_cols() ):
+                if renglon==ren:
+                    if columna==col:
+                        self.__laberinto.set_item( ren, col, 'S')
 
     def es_salida( self , ren , col ): # en la posicion actual es salida??
         return self.__laberinto.get_item(ren,col) == 'S'
+
+    def es_entrada(self,ren,col):
+        return self.__laberinto.get_item(ren,col) == 'E'
 
     def buscar_entrada( self ):
         encontrado = False
@@ -61,30 +72,27 @@ class LaberintoADT:
 
     def resolver_laberinto( self ):
         actual = self.__camino.peek() #(5,2)
-
         # buscar izquierda
         # agragar validaciones para los límites del laberinto
-        if actual[1]-1 != -1 \
-        and self.__laberinto.get_item(actual[0],actual[1]-1) == '0' \
-        and self.get_previa() != (actual[0],actual[1]-1)  \
-        and self.__laberinto.get_item(actual[0],actual[1]-1) != 'X':
+        if actual[1]-1 != -1 and self.es_salida(actual[0],actual[1]-1 ) or self.__laberinto.get_item(actual[0],actual[1]-1) == '0' and self.get_previa() != (actual[0],actual[1]-1)  and self.__laberinto.get_item(actual[0],actual[1]-1) != 'X':
             self.set_previa( actual)
             self.__camino.push( ( actual[0],actual[1]-1 ) )
 
         # buscar arriba
-        elif actual[0]-1 != -1 \
-        and self.__laberinto.get_item(actual[0]-1,actual[1]) == '0' \
-        and self.get_previa() != (actual[0]-1,actual[1])  \
-        and self.__laberinto.get_item(actual[0]-1,actual[1]) != 'X':
+        elif actual[0]-1 != -1 and self.es_salida(actual[0]-1,actual[1]) or self.__laberinto.get_item(actual[0]-1,actual[1]) == '0' and self.get_previa() != (actual[0]-1,actual[1])  and self.__laberinto.get_item(actual[0]-1,actual[1]) != 'X':
             self.set_previa( actual)
             self.__camino.push( (actual[0]-1,actual[1]) )
+
         # buscar derecha
-        elif 1==0 :
-            pass
+        elif actual[1]+1 != -1 and self.es_salida(actual[0], actual[1]+1) or self.__laberinto.get_item(actual[0], actual[1]+1) == '0' and self.get_previa() != (actual[0], actual[1]+1)  and self.__laberinto.get_item(actual[0], actual[1]+1) != 'X':
+            self.set_previa( actual)
+            self.__camino.push( (actual[0], actual[1]+1) )
 
         # buscar abajo
-        elif 1 == 0 :
-            pass
+        elif actual[0]+1 != -1 and self.es_salida(actual[0]+1,actual[1]) or self.__laberinto.get_item(actual[0]+1, actual[1]) == "0" and self.get_previa() != (actual[0]+1, actual[1]) and self.__laberinto.get_item(actual[0]+1, actual[1]) != "X" :
+            self.set_previa( actual)
+            self.__camino.push( (actual[0]+1,actual[1]) )
+
         else:
             self.__laberinto.set_item( actual[0] , actual[1] ,'X' )
             self.__previa = actual
