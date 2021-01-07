@@ -25,9 +25,9 @@ print(".........................................................................
 print("Pruebas de las colas con prioridad acotada")
 print("..............................................................................")
 
-maestre = {"prioridad":4 , "descripción":"Maestres","persona":"juan P"}
+maestre = {"prioridad":4 , "descripción":"Maestre","persona":"juan P"}
 ninos = {"prioridad":2 , "descripción":"Niños","personas":["Santi H","Ángel H"]}
-mecanico = {"prioridad":4 , "descripción":"Mecánicos","persona":"Mario Z"}
+mecanico = {"prioridad":4 , "descripción":"Mecánico","persona":"Mario Z"}
 mujeres = {"prioridad":3 , "descripción":"Mujeres","personas":["Elizabeth R","Samatha C"]}
 terceraEdad = {"prioridad":2 , "descripción":"3ra edad","personas":["Rodolfo F","Susana L"]}
 ninas = {"prioridad":1 , "descripción":"Niñas","personas":["Sugeily C","Mariana M"]}
