@@ -1,4 +1,4 @@
-from colas import Queue
+from colas import Queue,BoundedPriorityQueue
 
 q1= Queue()
 q1.enqueue(3)
@@ -19,3 +19,16 @@ print(atencion.to_string())
 siguiente= atencion.dequeue()
 print(f"Bienvenido Sr.{siguiente['nombre']}, en que podemos servirle el dia de hoy")
 print(atencion.to_string())
+
+print("Pruebas de las colas con prioridad acotada")
+maestres = {"prioridad":4 , "descripción":"Maestres","personas":["juan P","diego H"]}
+niños = {"prioridad":2 , "descripción":"Niños","personas":["Santi H","Ángel H"]}
+mecanicos = {"prioridad":4 , "descripción":"Mecánicos","personas":["Diana T","Maria Z"]}
+
+cpa = BoundedPriorityQueue(7)
+cpa.enqueue(maestres['prioridad'], maestres)
+cpa.enqueue(niños['prioridad'], niños)
+cpa.enqueue(mecanicos['prioridad'], mecanicos)
+cpa.to_string()
+sig= cpa.dequeue()
+print(sig)
