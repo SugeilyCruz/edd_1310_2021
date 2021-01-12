@@ -50,8 +50,6 @@ class PriorityQueue:
             print("\n----El barco ya ha sido evacuado por completo-----")
 
     def to_str(self):
-        #return ' '.join([str(i) for i in self.__data])
-        self.__data = sorted(self.__data, key = lambda x: (x[0], x[2]))
         for item in self.__data:
             print(f'|\t{item[0]}-{item[1]} \t|')
         print('\n')
