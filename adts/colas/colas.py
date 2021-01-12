@@ -25,6 +25,36 @@ class Queue:
         return cadena
 
 # tarea PriorityQueue
+class PriorityQueue:
+    def __init__(self):
+        self.__data = list()
+
+    def is_empty(self):
+        return len(self.__data) == 0
+
+    def enqueue(self, prioridad, elem, entrada = 0):
+        if len(self.__data) ==  0:
+            self.__data.append( [prioridad, elem, entrada] )
+        else:
+            if  elem not in self.__data:
+                for i in self.__data:
+                    if prioridad == i[0]:
+                        entrada += 1
+                self.__data.append( [prioridad, elem, entrada] )
+            self.__data = sorted(self.__data, key = lambda x: (x[0], x[2])) #Ordena con prioridad y entrada.
+
+    def dequeue(self):
+        if not self.is_empty():
+            return print(self.__data.pop(0)[1])
+        else:
+            print("\n----El barco ya ha sido evacuado por completo-----")
+
+    def to_str(self):
+        #return ' '.join([str(i) for i in self.__data])
+        self.__data = sorted(self.__data, key = lambda x: (x[0], x[2]))
+        for item in self.__data:
+            print(f'|\t{item[0]}-{item[1]} \t|')
+        print('\n')
 
 class BoundedPriorityQueue:
     def __init__(self, niveles):
@@ -47,7 +77,11 @@ class BoundedPriorityQueue:
             for nivel in self.__data:
                 if not nivel.is_empty():
                     self.__size -= 1
-                    return nivel.dequeue()
+                    return print(f"{nivel.dequeue()}\n")
+                else:
+                    print("No hay nadie en la cola")
+        else:
+            print("\n----El barco ya ha sido evacuado por completo-----")
 
     def to_string(self):
         print("Cola:")
