@@ -22,6 +22,6 @@ class Stack:
 
     def to_string(self):
         print("-----")
-        for item in self.__data[::-1]:#recorre de atras para adelante.
+        for item in self.__data[::-1]:#recorre de atras para adelante..
             print(f"| {item} |")
             print("-----")
