@@ -18,7 +18,7 @@ class Stack:
         self.__data.append(value)
 
     def peek(self):
-        return self.__data[len(Self.__data)-1]#porque el indice empieza en 0.
+        return self.__data[len(self.__data)-1]#porque el indice empieza en 0.
 
     def to_string(self):
         print("-----")
