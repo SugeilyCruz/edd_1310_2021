@@ -25,7 +25,7 @@ def main2():
 main2()
 
 print("Hacer una función recursiva que reciba de entrada una pila con al menos 3 elementos y con recursividad elimine el elemento en la posición media.")
-def deleteMid(pila, size, curr) :
+def deleteMid(pila, size, curr=0) :
     if (pila.is_empty() or curr == size) :
         return
     x = pila.peek()
@@ -52,7 +52,7 @@ def main3():
     print("---Pila inicial---")
     st.to_string()
     print("---Pila Nueva---")
-    deleteMid(st, st.length(), 0)
+    deleteMid(st, st.length())
     st.to_string()
 
 main3()
