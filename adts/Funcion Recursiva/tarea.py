@@ -25,34 +25,34 @@ def main2():
 main2()
 
 print("Hacer una función recursiva que reciba de entrada una pila con al menos 3 elementos y con recursividad elimine el elemento en la posición media.")
-def deleteMid(pila, size, curr=0) :
-    if (pila.is_empty() or curr == size) :
+def deleteMid(pila, curr=1) :
+    middle=round((pila.length()+curr) /2)
+    if (pila.is_empty()):
         return
-    x = pila.peek()
-    pila.pop()
-    deleteMid(pila, size, curr+1)
-    middle=(size/2)
-    if middle == int(middle):
-        if (curr != middle and curr != (middle-1)):
-            pila.push(x)
     else:
-        if (curr != int(size/2)) :
-            pila.push(x)
+        if (curr != middle):
+            n = pila.peek()
+            pila.pop()
+            deleteMid(pila, curr= curr+1)
+            pila.push(n)
+        else:
+            print(f"Valor medio de la pila: {pila.peek()}")
+            pila.pop()
 
 from pilas import Stack
 def main3():
     st = Stack()
-    st.push('C')
-    st.push('O')
-    st.push('D')
-    st.push('I')#eliminar
-    st.push('G')
-    st.push('O')
-    st.push('S')
+    st.push('q')
+    st.push('u')
+    st.push('e')
+    st.push('s')#eliminar
+    st.push('i')
+    st.push('t')
+    st.push('o')
     print("---Pila inicial---")
     st.to_string()
     print("---Pila Nueva---")
-    deleteMid(st, st.length())
+    deleteMid(st)
     st.to_string()
 
 main3()
