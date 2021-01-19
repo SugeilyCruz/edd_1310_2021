@@ -45,17 +45,18 @@ class BinarySearchTree:
             self.__recorrido_pre(nodo.right)
 
     def __recorrido_post(self, nodo):
-        self.__recorrido_post(nodo.left)
-        self.__recorrido_post(nodo.right)
-        print(nodo.data, end=" , ")
+        if nodo != None:
+            self.__recorrido_post(nodo.left)
+            self.__recorrido_post(nodo.right)
+            print(nodo.data, end=" , ")
 
     def transversal(self, format="inorden" ):
         if format == "inorden":
             self.__recorrido_in(self.__root)
         elif format == "preorden":
-            print("Recorrido en pre")
+            self.__recorrido_pre(self.__root)
         elif format == "postorden":
-            print("Postorden")
+            self.__recorrido_post(self.__root)
         else:
             print("Error, ese formato no existe")
         print("")
