@@ -45,7 +45,7 @@ class BinarySearchTree:
             self.__recorrido_pre(nodo.right)
 
     def __recorrido_post(self, nodo):
-        if nodo != None:
+        if nodo:
             self.__recorrido_post(nodo.left)
             self.__recorrido_post(nodo.right)
             print(nodo.data, end=" , ")
@@ -60,3 +60,33 @@ class BinarySearchTree:
         else:
             print("Error, ese formato no existe")
         print("")
+
+    def search(self, value):
+        if self.__root == None:
+            return None
+        else:
+            return self.__search(self.__root, value)
+
+    def __search(self, nodo, value):
+        if nodo == None:#vacio?? caso base de recursividad
+            return None
+        elif nodo.data == value: #caso base de recursividad
+            print("Encontrado")
+            return nodo
+        elif value < nodo.data:
+            print("Buscar a la izq")
+            return self.__search(nodo.left, value)
+        else:
+            print("buscar a la der")
+            return self.__search(nodo.right, value)
+
+    def remove(self, value):
+        encontrado= self.search(value)#introducir el metodo search hasta que encuente el no y seguir con lo de abajo.
+        #caso 1
+        if encontrado.left == None and encontrado.right ==None:
+            print("Eliminando", encontrado.data)
+            self.search(value) == None
+        #caso 2
+        elif (encontrado.left != None and encontrado.right == None) or \
+        (encontrado.left == None and encontrado.right != None):
+            print(f"Encontrado: {encontrado.data}")
